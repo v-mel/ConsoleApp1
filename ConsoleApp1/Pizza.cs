@@ -13,7 +13,7 @@ namespace ConsoleApp1
 
         public Pizza()
         {
-            this.pizzaName = "margarita";
+            this.pizzaName = "Margarita";
         }
 
         public Pizza(string pizzaName)
@@ -30,26 +30,26 @@ namespace ConsoleApp1
             }
         }
 
-        public void ShowPizzaName(string pizzaName)
+        public void ShowPizzaName()
         {
             Console.Clear();
-            Console.WriteLine("Your PIzza: \n " + pizzaName);
+            Console.WriteLine("Your PIzza: \n " + this.pizzaName);
             Console.ReadLine();
         }
 
-        public void ShowPizzaWithExtras (string pizzaName, int[] extrasSelection, string[] extrasNames)
+        public void ShowPizzaWithExtras()
         {
             Console.Clear();
             Console.WriteLine("Your pizza:\n" + pizzaName + " with additional: ");
-            for (int i = 0; i < extrasSelection.Length; i++)
+            for (int i = 0; i < extrasNames.Length; i++)
             {
-                if (extrasSelection[i] == 0)
+                if (extrasNames[i] == null)
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine(extrasNames[extrasSelection[i] - 1]);
+                    Console.WriteLine(extrasNames[i]);
                 }
 
             }
@@ -58,7 +58,7 @@ namespace ConsoleApp1
 
         }
 
-        public int[] SelectPizzaExtras (string[] extrasNames)
+        public int[] SelectPizzaExtras(string[] extrasNames)
         {
             int[] extrasSelection = new int[5];
             //todo
