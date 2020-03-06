@@ -9,58 +9,37 @@ namespace ConsoleApp1
 {
     class Program
     {
-        static void ShowMenu(string[] inputArray, string userMessage)
-        {
-            Console.WriteLine(userMessage);
-            for (int i = 0; i < inputArray.Length; i++)
-            {
-                Console.WriteLine(i + 1 + ": " + inputArray[i]);
-            };
-        }
-
         static void Main(string[] args)
         {
-            //defining menu, user choices, counters
-            string[] pizzalist = { "margarita", "cesario", "bavarian" };
-            string[] extras = { "cheese", "cream sauce", "mushrooms", "chicken" };
-            string[] extrasfinalchoice = new string[4];
-            int extrasInput;
-            int choice;
-            int choicecounter = 0;
-            string pizzamessage = "select your pizza:";
-            string extrasmessage = "select your extras (optional up to 4 ingredients). press '0' to skip this step:";
+            Pizza pizza;
+            Order pizzasOrder = new Order();
+            int ordersCounter = 0;
+
+            OrderingFlow onePizzaOrder = new OrderingFlow();
 
 
-
-            // get user choice on pizza
-            ShowMenu(pizzalist, pizzamessage);
-            choice = int.Parse(Console.ReadLine()) - 1;
-            Console.Clear();
-
-            // get user choice on extras:
             do
             {
-                Console.Clear();
-                ShowMenu(extras, extrasmessage);
-                extrasInput = int.Parse(Console.ReadLine()) - 1;
-                if (extrasInput < 0)
+                pizza = onePizzaOrder.OrderPIzza();
+                if (pizza.pizzaName != "")
                 {
-                    break;
+                    pizzasOrder.pizzasArray[ordersCounter] = pizza;
+                    ordersCounter++;
                 }
-                else
-                {
-                    extrasfinalchoice[choicecounter] = extras[extrasInput];
-                    choicecounter += 1;
-                }
+                else { break; }
+
+            } while (pizza.pizzaName != "" && ordersCounter < pizzasOrder.pizzasArray.Length);
+
+            if (pizzasOrder.pizzasArray[0] != null)
+            {
+                pizzasOrder.ShowFullOrder();
             }
-            while (choicecounter < extrasfinalchoice.Length);
-
-            Pizza userSelectedPizza = new Pizza(pizzalist[choice], extrasfinalchoice);
-
-            // show confirmation of user choice
-            userSelectedPizza.ShowPizzaWithExtras();
-
-            Console.ReadKey();
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Order was not Done");
+            }
+            Console.ReadLine();
         }
     }
 }

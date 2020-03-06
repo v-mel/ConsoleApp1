@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     class Order
     {
-        public Pizza[] pizzasArray;
+        public Pizza[] pizzasArray = new Pizza[5];
 
         public Order()
         {
@@ -18,13 +18,14 @@ namespace ConsoleApp1
         {
             for (int i = 0; i < pizzas.Length; i++)
             {
-                pizzasArray[i] = pizzas[i];
+                this.pizzasArray[i] = pizzas[i];
             }
         }
 
         public void ShowOrder()
         {
-            Console.WriteLine("Your Pizzas:");
+            Console.Clear();
+            Console.WriteLine("Your Pizzas order:");
             for (int i = 0; i < pizzasArray.Length; i++)
             {
                 Console.WriteLine(pizzasArray[i].pizzaName + ";");
@@ -32,10 +33,18 @@ namespace ConsoleApp1
         }
         public void ShowFullOrder()
         {
-            Console.WriteLine("Your Pizzas with supplements");
+            Console.Clear();
+            Console.WriteLine("Your Full order with supplements");
             for (int i = 0; i < pizzasArray.Length; i++)
             {
-                Console.WriteLine(pizzasArray[i].pizzaName + " with supplements:");
+                if (pizzasArray[i] != null)
+                {
+                    Console.WriteLine(pizzasArray[i].pizzaName + " with supplements:");
+                }
+                else
+                {
+                    break;
+                }
                 if (pizzasArray[i].extrasNames[0] == null)
                 {
                     Console.WriteLine("no extras were selected");
@@ -54,8 +63,6 @@ namespace ConsoleApp1
                         }
 
                     }
-                    Console.ReadLine();
-
                 }
             }
 
