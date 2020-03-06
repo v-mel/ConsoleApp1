@@ -18,22 +18,18 @@ namespace ConsoleApp1
             };
         }
 
-        static void ShowConfirmation(int selectedPizza, int[] selectedExtras, string[] allPizzas, string[] allExtras)
-        {
-           
-        }
-
-        static void main(string[] args)
+        static void Main(string[] args)
         {
             //defining menu, user choices, counters
             string[] pizzalist = { "margarita", "cesario", "bavarian" };
             string[] extras = { "cheese", "cream sauce", "mushrooms", "chicken" };
-            int[] extrasfinalchoice = new int[4];
+            string[] extrasfinalchoice = new string[4];
+            int extrasInput;
             int choice;
-            int extraschoice = -1;
             int choicecounter = 0;
             string pizzamessage = "select your pizza:";
             string extrasmessage = "select your extras (optional up to 4 ingredients). press '0' to skip this step:";
+
 
 
             // get user choice on pizza
@@ -42,19 +38,27 @@ namespace ConsoleApp1
             Console.Clear();
 
             // get user choice on extras:
-            while (extraschoice != 0 && choicecounter < extrasfinalchoice.Length)
+            do
             {
                 Console.Clear();
                 ShowMenu(extras, extrasmessage);
+                extrasInput = int.Parse(Console.ReadLine()) - 1;
+                if (extrasInput < 0)
+                {
+                    break;
+                }
+                else
+                {
+                    extrasfinalchoice[choicecounter] = extras[extrasInput];
+                    choicecounter += 1;
+                }
+            }
+            while (choicecounter < extrasfinalchoice.Length);
 
-                extraschoice = int.Parse(Console.ReadLine()); ///remove extras choisej
-                extrasfinalchoice[choicecounter] = extraschoice;
-                choicecounter += 1;
-            };
-
+            Pizza userSelectedPizza = new Pizza(pizzalist[choice], extrasfinalchoice);
 
             // show confirmation of user choice
-            ShowConfirmation(choice, extrasfinalchoice, pizzalist, extras);
+            userSelectedPizza.ShowPizzaWithExtras();
 
             Console.ReadKey();
         }

@@ -41,29 +41,36 @@ namespace ConsoleApp1
         {
             Console.Clear();
             Console.WriteLine("Your pizza:\n" + pizzaName + " with additional: ");
-            for (int i = 0; i < extrasNames.Length; i++)
+            if (extrasNames[0] == null)
             {
-                if (extrasNames[i] == null)
+                Console.WriteLine("no extras were selected");
+            }
+            else
+            {
+                for (int i = 0; i < extrasNames.Length; i++)
                 {
-                    break;
+                    if (extrasNames[i] == null)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine(extrasNames[i]);
+                    }
+
                 }
-                else
-                {
-                    Console.WriteLine(extrasNames[i]);
-                }
+                Console.ReadLine();
+
 
             }
-            Console.ReadLine();
-
-
         }
 
-        public int[] SelectPizzaExtras(string[] extrasNames)
-        {
-            int[] extrasSelection = new int[5];
-            //todo
+        //public int[] SelectPizzaExtras(string[] extrasNames)
+        //{
+        //    int[] extrasSelection = new int[5];
+        //    //todo
 
-            return extrasSelection;
-        }
+        //    return extrasSelection;
+        //}
     }
 }
